@@ -1,2 +1,5 @@
 #matlab autosave files
 *.asv
+
+#matlab log file
+*.log
