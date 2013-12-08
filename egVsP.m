@@ -1,13 +1,11 @@
-m_0 = 9.10938;          % [kg] mass of electron
-hbar = 1.054572e-34;    % [Js] reduced Planck constant
-q = 1.602177e-19;       % [C] elementary charge
 
-bandGap = cell(1,3);
-
+%calculate egVsP
+gapsToCalculate = 10;
+bandGap = cell(1,gapsToCalculate);
 pArray = logspace(log10(0.1), log10(1000), 100);
 arrayLen = length(pArray);  %yeah, I know it is hardcoded one line up
 
-for i = 1:10
+for i = 1:gapsToCalculate;
     solveFunc = @(p) findBandEdge(p, i+1, 'bottom');
     alphaAArray = arrayfun(solveFunc, pArray);
     bandGap{i} = alphaAArray - pi*i;
@@ -16,7 +14,7 @@ end
 %plot egVsP
 loglog(pArray, bandGap{1})
 hold on;
-for i = 2:10
+for i = 2:gapsToCalculate;
     plot(pArray, bandGap{i});
 end
 hold off;
@@ -25,3 +23,25 @@ set(gca, 'YTickLabel',num2str(get(gca,'YTick')'));
 set(gca, 'XTickLabel',num2str(get(gca,'XTick')'));
 xlabel('P')
 ylabel('Eg')
+
+%calculate egVsN
+pArray = logspace(log10(.1), log10(1000), 10);
+bandGap = cell(1,length(pArray));
+nArray = 1:20;
+
+i = 1;
+for p = pArray
+    solveFunc = @(n) findBandEdge(p, n+1, 'bottom');
+    alphaAArray = arrayfun(solveFunc, nArray);
+    bandGap{i} = alphaAArray - pi*(nArray);
+    i = i + 1;
+end
+
+%plot egVsN
+semilogx(nArray, bandGap{1})
+hold on;
+for i = 2:length(pArray)
+    plot(nArray, bandGap{i})
+end
+hold off;
+
