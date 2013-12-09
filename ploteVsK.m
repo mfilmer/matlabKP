@@ -24,5 +24,5 @@ function cosFunc = genCosFunc(p, n)
     A = top - bottom;
     factor = -mod(n,2) * 2 + 1;
     
-    cosFunc = @(x) factor*A/2*cos(pi*x) + bottom - A/2;
+    cosFunc = @(x) factor*A/2*cos(pi*x) + bottom + A/2;
 end
