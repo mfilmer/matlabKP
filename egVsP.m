@@ -18,11 +18,11 @@ for n = 2:gapsToCalculate;
     plot(pArray, bandGap{n});
 end
 hold off;
-%set(gca, 'YLim', [4e-2, 4]);
+set(gca, 'YLim', [3e-2, 30]);
 set(gca, 'YTickLabel',num2str(get(gca,'YTick')'));
 set(gca, 'XTickLabel',num2str(get(gca,'XTick')'));
-xlabel('P')
-ylabel('Eg')
+xlabel('Coupling Strength (P)')
+ylabel('Band Gap (Eg)')
 
 %calculate egVsN
 figure()
@@ -44,4 +44,6 @@ for i = 2:length(pArray)
     plot(nArray, bandGap{i})
 end
 hold off;
-
+set(gca, 'YTickLabel',num2str(get(gca,'YTick')'));
+xlabel('Band Gap Number (N)')
+ylabel('Bang Gap (Eg)')
