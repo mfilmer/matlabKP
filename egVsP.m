@@ -5,17 +5,17 @@ bandGap = cell(1,gapsToCalculate);
 pArray = logspace(log10(0.1), log10(1000), 100);
 arrayLen = length(pArray);  %yeah, I know it is hardcoded one line up
 
-for i = 1:gapsToCalculate;
-    solveFunc = @(p) findBandEdge(p, i+1, 'bottom') - findBandEdge(p, i, 'top');
-    bandGap{i} = arrayfun(solveFunc, pArray);
+for n = 1:gapsToCalculate;
+    solveFunc = @(p) findBandEdge(p, n+1, 'bottom') - findBandEdge(p, n, 'top');
+    bandGap{n} = arrayfun(solveFunc, pArray);
 end
 
 %plot egVsP
 figure()
 loglog(pArray, bandGap{1})
 hold on;
-for i = 2:gapsToCalculate;
-    plot(pArray, bandGap{i});
+for n = 2:gapsToCalculate;
+    plot(pArray, bandGap{n});
 end
 hold off;
 set(gca, 'YLim', [4e-2, 4]);
