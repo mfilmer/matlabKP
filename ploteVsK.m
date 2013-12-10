@@ -6,14 +6,17 @@ for i = 1:n
     cosFuncs{i} = genCosFunc(p, i);
 end
 
-
 xRange = -1:0.01:1;
+data = [xRange', cosFuncs{1}(xRange)'];
 plot(xRange, cosFuncs{1}(xRange))
 hold on;
 for i = 2:n
+    data = [data, cosFuncs{i}(xRange)'];
     plot(xRange, cosFuncs{i}(xRange))
 end
 hold off;
+
+csvwrite(strcat('data\eVsK-P', num2str(p), '.csv'), data);
 
 end
 
