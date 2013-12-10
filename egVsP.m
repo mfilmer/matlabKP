@@ -13,9 +13,11 @@ end
 %plot egVsP
 figure()
 loglog(pArray, bandGap{1})
-hold on;
+csvwrite(strcat('data\egVsP_N-', num2str(1), '.csv'), transpose([pArray; bandGap{1}]));
+hold all;
 for n = 2:gapsToCalculate;
     plot(pArray, bandGap{n});
+    csvwrite(strcat('data\egVsP_N-', num2str(n), '.csv'), transpose([pArray; bandGap{n}]));
 end
 hold off;
 set(gca, 'YLim', [3e-2, 30]);
@@ -39,9 +41,11 @@ end
 
 %plot egVsN
 semilogy(nArray, bandGap{1})
-hold on;
+csvwrite(strcat('data\egVsN_P-', num2str(pArray(1)), '.csv'), transpose([nArray; bandGap{1}]));
+hold all;
 for i = 2:length(pArray)
     plot(nArray, bandGap{i})
+    csvwrite(strcat('data\egVsN_P-', num2str(pArray(i)), '.csv'), transpose([nArray; bandGap{i}]));
 end
 hold off;
 set(gca, 'YTickLabel',num2str(get(gca,'YTick')'));
